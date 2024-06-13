@@ -3,9 +3,9 @@ import React from 'react'
 
 const IconRecentsTab = () => {
   return (
-    <div>
-      <img src={history} alt="Recent Search Icon"/>
-    </div>
+    <>
+      <img src={history} alt="Recent Search Icon" style={{width: "20px"}}/>
+    </>
   )
 }
 

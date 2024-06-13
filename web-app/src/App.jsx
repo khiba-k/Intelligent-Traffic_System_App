@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import MyGoogleMap from './components/MyGoogleMap';
-import SearchIcon from './components/SearchIcon';
+import IconSearch from './components/IconSearch';
 import Tabs from './components/Tabs';
-import EnterArrow from './components/EnterArrow';
+import IconEnterArrow from './components/IconEnterArrow';
+import IconSaveButton from './components/IconSaveButton';
 
 
 
@@ -39,12 +40,12 @@ function App() {
               />
             
               <button className="btn btn-primary" type="button" id="button-addon2" style={{backgroundColor: "white", border: "none", height: "36px"}} onClick={handleSearch}>
-                <EnterArrow/>
+                <IconEnterArrow/>
               </button>
             </div>
           </div>
           <div className="col">
-            <h3>{locationName}</h3>
+            <h3>{locationName} <button style={{border: "none", borderRadius: "100%"}}><IconSaveButton/></button></h3>
             {/* <SearchIcon/> */}
           </div>
         </div>

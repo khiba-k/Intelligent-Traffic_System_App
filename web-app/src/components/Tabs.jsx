@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "../App.css";
+import IconRecentsTab from "./IconRecentsTab"
+import IconCustomize from "./IconCustomize";
+import IconSavedTab from "./IconSavedTab";
+import IconTraveled from "./IconTraveled";
 
 const Tabs = ({ activeTab, setActiveTab }) => {
   const handleTabClick = (tab) => {
@@ -18,7 +22,7 @@ const Tabs = ({ activeTab, setActiveTab }) => {
         aria-current={activeTab === "Recent"}
         onClick={() => handleTabClick("Recent")}
       >
-        Recent
+        <IconRecentsTab/>&nbsp;&nbsp;&nbsp;Recent
       </li>
       <li
         className={`list-group-item ${
@@ -26,7 +30,7 @@ const Tabs = ({ activeTab, setActiveTab }) => {
         } custom-list-group`}
         onClick={() => handleTabClick("Marked")}
       >
-        Marked
+        <IconSavedTab/>&nbsp;&nbsp;&nbsp;Marked
       </li>
       <li
         className={`list-group-item ${
@@ -34,7 +38,7 @@ const Tabs = ({ activeTab, setActiveTab }) => {
         } custom-list-group`}
         onClick={() => handleTabClick("Traveled")}
       >
-        Traveled
+        <IconTraveled/>&nbsp;&nbsp;&nbsp;Traveled
       </li>
       <li
         className={`list-group-item ${
@@ -42,7 +46,7 @@ const Tabs = ({ activeTab, setActiveTab }) => {
         } custom-list-group`}
         onClick={() => handleTabClick("Customize")}
       >
-        Customize
+        <IconCustomize/>&nbsp;&nbsp;&nbsp;Customize
       </li>
     </ul>
   );
