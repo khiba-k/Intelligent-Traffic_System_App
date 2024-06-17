@@ -64,14 +64,13 @@ function App() {
                 onChange={handleDestinationChange}
                 style={{ width: "191px", marginLeft: "10px" }}
               />
+              &nbsp;
+              <button style={{ border: "none", borderRadius: "100%" }}><IconSaveButton /></button>
 
-              {/* <button className="btn btn-primary" type="button" style={{ backgroundColor: "white", border: "none", height: "36px" }} onClick={handleSearch}>
-                <IconEnterArrow/>
-              </button> */}
             </div>
           </div>
           <div className="col">
-            <h3>{locationName} <button style={{ border: "none", borderRadius: "100%" }}><IconSaveButton /></button></h3>
+            <h3>{locationName} </h3>
           </div>
         </div>
       </div>
