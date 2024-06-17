@@ -8,11 +8,6 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
     width: '100%',
   };
 
-  // const [currentLocation, setCurrentLocation] = useState({ lat: 0, lng: 0 });
-  // const [currentLocationName, setCurrentLocationName] = useState('');
-  // const [searchedLocation, setSearchedLocation] = useState(null); // State to store searched location
-  // const [error, setError] = useState(null);
-
   useEffect(() => {
     if (currentLocation && destination) {
       calculateDirections();
@@ -29,8 +24,8 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
       },
       (result, status) => {
         if (status === 'OK') {
-          setLocationName(destination); // Update location name with destination
           setDirections(result);
+          setLocationName(`${currentLocation} to ${destination}`);
         } else {
           console.error('Directions request failed due to ' + status);
           setLocationName('Error fetching directions');
@@ -50,12 +45,12 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
       </div> */}
       <LoadScript googleMapsApiKey="AIzaSyCfZK9eq1sBWYplK3kxdkE7BJ6JkXGsNWs">
         <GoogleMap
-        mapContainerStyle={mapStyles}
-        zoom={12}
-        center={{ lat: -34.397, lng: 150.644 }} // Default center if no route is displayed
-      >
-        {directions && <DirectionsRenderer directions={directions} />}
-      </GoogleMap>
+          mapContainerStyle={mapStyles}
+          zoom={12}
+          center={{ lat: -34.397, lng: 150.644 }} // Default center if no route is displayed
+        >
+          {directions && <DirectionsRenderer directions={directions} />}
+        </GoogleMap>
       </LoadScript>
     </div>
   );
