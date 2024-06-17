@@ -10,12 +10,22 @@ import IconSaveButton from './components/IconSaveButton';
 
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [currentLocation, setCurrentLocation] = useState('');
+  const [destination, setDestination] = useState('');
   const [locationName, setLocationName] = useState('');
 
   const handleSearch = () => {
-    // Trigger the location search by setting searchQuery state
-    setSearchQuery(locationName);
+    if (currentLocation && destination) {
+      setLocationName(destination); // Set location name to destination
+    }
+  };
+
+  const handleCurrentLocationChange = (e) => {
+    setCurrentLocation(e.target.value);
+  };
+
+  const handleDestinationChange = (e) => {
+    setDestination(e.target.value);
   };
   const [activeTab, setActiveTab] = useState('Recent');
 
@@ -28,18 +38,26 @@ function App() {
           <div className="col pr-0">
           
             <div className="input-group mb-3">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Current Location"
+                aria-label="Current Location"
+                value={currentLocation}
+                onChange={handleCurrentLocationChange}
+                style={{ width: "191px" }}
+              />
               <input
                 type="text"
                 className="form-control"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="button-addon2"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={{width: "191px"}}
+                placeholder="Destination"
+                aria-label="Destination"
+                value={destination}
+                onChange={handleDestinationChange}
+                style={{ width: "191px", marginLeft: "10px" }}
               />
             
-              <button className="btn btn-primary" type="button" id="button-addon2" style={{backgroundColor: "white", border: "none", height: "36px"}} onClick={handleSearch}>
+            <button className="btn btn-primary" type="button" style={{ backgroundColor: "white", border: "none", height: "36px" }} onClick={handleSearch}>
                 <IconEnterArrow/>
               </button>
             </div>
@@ -74,7 +92,7 @@ function App() {
         {/* Map column */}
         <div className="col-lg-8 pt-5">
           <div className="container-sm">
-            <MyGoogleMap searchQuery={searchQuery} setLocationName={setLocationName} />
+          <MyGoogleMap currentLocation={currentLocation} destination={destination} setLocationName={setLocationName} />
             <div className="pt-5">
               <div className="card w-100" style={{ width: "980px", border: "none"}}>
                 <ul className="list-group" style={{backgroundColor: "#D9D9D9" }}>
