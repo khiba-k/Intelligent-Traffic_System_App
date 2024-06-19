@@ -58,3 +58,9 @@ body {
   background-color: rgba(217, 217, 217, 0.5);
 
 }
+
+/* @media (max-width: 991.98px) {
+  .lower-row .col-lg-2 {
+    display: none;
+  }
+} */

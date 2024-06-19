@@ -25,10 +25,10 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
       (result, status) => {
         if (status === 'OK') {
           setDirections(result);
-          setLocationName(`${currentLocation} to ${destination}`);
-        } else {
-          console.error('Directions request failed due to ' + status);
-          setLocationName('Error fetching directions');
+          setLocationName(`${currentLocation}  to  ${destination}`);
+         } else {
+           console.error('Directions request failed due to ' + status);
+         setLocationName('Route Not Found');
         }
       }
     );
@@ -38,16 +38,11 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
 
   return (
     <div>
-      {/* {error && <div>Error: {error}</div>} */}
-      {/* <div>
-        <h3>Current Location:</h3>
-        <p>{currentLocationName}</p>
-      </div> */}
       <LoadScript googleMapsApiKey="AIzaSyCfZK9eq1sBWYplK3kxdkE7BJ6JkXGsNWs">
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={12}
-          center={{ lat: -34.397, lng: 150.644 }} // Default center if no route is displayed
+          center={{ lat: -29.311667, lng: 27.481389 }} // Default center if no route is displayed
         >
           {directions && <DirectionsRenderer directions={directions} />}
         </GoogleMap>

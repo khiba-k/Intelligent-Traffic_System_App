@@ -3,8 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import MyGoogleMap from './components/MyGoogleMap';
 import Tabs from './components/Tabs';
-// import IconEnterArrow from './components/IconEnterArrow';
 import IconSaveButton from './components/IconSaveButton';
+import trafficSpeedIcon from "./assets/speedometerIcon.png";
 
 
 
@@ -12,6 +12,20 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState('');
   const [destination, setDestination] = useState('');
   const [locationName, setLocationName] = useState('');
+
+  const [activeTab, setActiveTab] = useState("Recent");
+  const [isTabColumnVisible, setIsTabColumnVisible] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth >= 992) {
+      setIsTabColumnVisible(true);
+    }
+  }, []);
+
+  const toggleTabColumn = () => {
+    setIsTabColumnVisible(!isTabColumnVisible);
+  };
+
 
   useEffect(() => {
     if (!currentLocation) {
@@ -35,7 +49,7 @@ function App() {
     }
   };
 
-  const [activeTab, setActiveTab] = useState('Recent');
+  // const [activeTab, setActiveTab] = useState('Recent');
 
   return (
     <div className="bg full-height">
@@ -46,6 +60,12 @@ function App() {
           <div className="col pr-0">
 
             <div className="input-group mb-3">
+              <button
+                className="btn btn-primary d-lg-none"
+                onClick={toggleTabColumn}
+              >
+                {isTabColumnVisible ? "Hide Tabs" : "Show Tabs"}
+              </button>
               <input
                 type="text"
                 className="form-control"
@@ -78,23 +98,34 @@ function App() {
       {/* lower row */}
       <div className="row lower-row">
         {/* Tab Column */}
-        <div className="col-lg-2" >
-          <div className="row justify-content-center">
-            <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
-          <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
-            <div className="card display-card" style={{ width: "200px" }}>
-
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item custom-list-group2"><h5>{activeTab}</h5></li>
-                <li className="list-group-item custom-list-group2 list-group">Lakeside</li>
-                <li className="list-group-item custom-list-group2">BEDCO</li>
-                <li className="list-group-item custom-list-group2">Home</li>
-                <li className="list-group-item custom-list-group2">Maseru Mall</li>
-              </ul>
+        {(isTabColumnVisible || window.innerWidth >= 992) && (
+          <div className="col-lg-2">
+            <div className="row justify-content-center">
+              <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+            </div>
+            <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
+              <div className="card display-card" style={{ width: "200px" }}>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item custom-list-group2">
+                    <h5>{activeTab}</h5>
+                  </li>
+                  <li className="list-group-item custom-list-group2 list-group">
+                    Lakeside
+                  </li>
+                  <li className="list-group-item custom-list-group2">
+                    BEDCO
+                  </li>
+                  <li className="list-group-item custom-list-group2">
+                    Home
+                  </li>
+                  <li className="list-group-item custom-list-group2">
+                    Maseru Mall
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         {/* Map column */}
         <div className="col-lg-8 pt-5">
           <div className="container-sm">
@@ -102,11 +133,14 @@ function App() {
             <div className="pt-5">
               <div className="card w-100" style={{ width: "980px", border: "none" }}>
                 <ul className="list-group" style={{ backgroundColor: "#D9D9D9" }}>
-                  <li className="list-group-item justify-content-center suggest-tab">Main North Rd&nbsp;&nbsp;&nbsp; 45 km/h
+                  <li className="list-group-item justify-content-center suggest-tab">Main North Rd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;45 km/h
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.2 km away &nbsp;&nbsp;&nbsp;(19 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11:39 AM</li>
-                  <li className="list-group-item suggest-tab">Naleli-Sekamaneng Rd &nbsp;&nbsp;&nbsp; 32 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <li className="list-group-item suggest-tab">Naleli-Sekamaneng Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;32 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     10.6 km away &nbsp;&nbsp;&nbsp;(26 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:05 AM</li>
-                  <li className="list-group-item suggest-tab">Moshoeshoe Rd &nbsp;&nbsp;&nbsp; 28 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <li className="list-group-item suggest-tab">Moshoeshoe Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;28 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     7.3 km away (32 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:11 AM</li>
                 </ul>
               </div>
