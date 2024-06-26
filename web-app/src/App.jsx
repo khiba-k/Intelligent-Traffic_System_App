@@ -5,6 +5,7 @@ import MyGoogleMap from './components/MyGoogleMap';
 import Tabs from './components/Tabs';
 import IconSaveButton from './components/IconSaveButton';
 import trafficSpeedIcon from "./assets/speedometerIcon.png";
+import Customize from './components/Customize';
 
 
 
@@ -49,9 +50,18 @@ function App() {
     }
   };
 
+
+  const [isBlackAndWhiteTheme, setIsBlackAndWhiteTheme] = useState(false);
+
+  const handleThemeChange = () => {
+    setIsBlackAndWhiteTheme(!isBlackAndWhiteTheme); // Toggle theme state
+  };
+  
+
   // const [activeTab, setActiveTab] = useState('Recent');
 
   return (
+    <div className={` ${isBlackAndWhiteTheme ? 'black-and-white-theme' : ''}`}>
     <div className="bg full-height">
       {/* container */}
       <div className="container upper-row p-5">
@@ -99,32 +109,49 @@ function App() {
       <div className="row lower-row">
         {/* Tab Column */}
         {(isTabColumnVisible || window.innerWidth >= 992) && (
-          <div className="col-lg-2">
-            <div className="row justify-content-center">
-              <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-            </div>
-            <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
-              <div className="card display-card" style={{ width: "200px" }}>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item custom-list-group2">
-                    <h5>{activeTab}</h5>
-                  </li>
-                  <li className="list-group-item custom-list-group2 list-group">
-                    Lakeside
-                  </li>
-                  <li className="list-group-item custom-list-group2">
-                    BEDCO
-                  </li>
-                  <li className="list-group-item custom-list-group2">
-                    Home
-                  </li>
-                  <li className="list-group-item custom-list-group2">
-                    Maseru Mall
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+           <div className={`col-lg-2 ${isBlackAndWhiteTheme ? 'black-and-white-theme' : ''}`}>
+           <div className="row justify-content-center">
+             <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+           </div>
+           <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
+             <div className="card display-card" style={{ width: "200px" }}>
+               <ul className="list-group list-group-flush">
+                 {activeTab !== "Customize" && (
+                   <li className="list-group-item custom-list-group2 list-group">
+                     Lakeside
+                   </li>
+                 )}
+                 {activeTab !== "Customize" && (
+                   <li className="list-group-item custom-list-group2 list-group">
+                     BEDCO
+                   </li>
+                 )}
+                 {activeTab !== "Customize" && (
+                   <li className="list-group-item custom-list-group2 list-group">
+                     Home
+                   </li>
+                 )}
+                 {activeTab !== "Customize" && (
+                   <li className="list-group-item custom-list-group2 list-group">
+                     Maseru Mall
+                   </li>
+                 )}
+                 {activeTab === "Customize" && (
+                   <>
+                     <li className="list-group-item custom-list-group2">
+                       <h5>Customize</h5>
+                     </li>
+                     <li className="list-group-item custom-list-group2">
+                       <button onClick={handleThemeChange}>
+                         Color Change
+                       </button>
+                     </li>
+                   </>
+                 )}
+               </ul>
+             </div>
+           </div>
+         </div>
         )}
         {/* Map column */}
         <div className="col-lg-8 pt-5">
@@ -150,6 +177,7 @@ function App() {
         {/* Empty column */}
         <div className="col-lg-2"></div>
       </div>
+    </div>
     </div>
   );
 }

@@ -59,6 +59,10 @@ body {
 
 }
 
+.black-and-white-theme {
+  filter: grayscale(100%);
+}
+
 /* @media (max-width: 991.98px) {
   .lower-row .col-lg-2 {
     display: none;
