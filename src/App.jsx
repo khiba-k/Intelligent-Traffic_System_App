@@ -13,6 +13,7 @@ function App() {
   const [locationName, setLocationName] = useState('');
   const [activeTab, setActiveTab] = useState("recents");
   const [isTabColumnVisible, setIsTabColumnVisible] = useState(false);
+  const [routes, setRoutes] = useState([]);
 
   useEffect(() => {
     if (window.innerWidth >= 992) {
@@ -105,25 +106,24 @@ function App() {
 
         <div className="col-lg-8 pt-5">
           <div className="container-sm">
-            <MyGoogleMap currentLocation={currentLocation} destination={destination} setLocationName={setLocationName} />
+            <MyGoogleMap 
+              currentLocation={currentLocation} 
+              destination={destination} 
+              setLocationName={setLocationName} 
+              setRoutes={setRoutes}
+            />
             <div className="pt-5">
               <div className="card w-100" style={{ width: "980px", border: "none" }}>
                 <ul className="list-group" style={{ backgroundColor: "#D9D9D9" }}>
-                  <li className="list-group-item justify-content-center suggest-tab">
-                    Main North Rd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;45 km/h
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.2 km away &nbsp;&nbsp;&nbsp;(19 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11:39 AM
-                  </li>
-                  <li className="list-group-item suggest-tab">
-                    Naleli-Sekamaneng Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;32 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    10.6 km away &nbsp;&nbsp;&nbsp;(26 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:05 AM
-                  </li>
-                  <li className="list-group-item suggest-tab">
-                    Moshoeshoe Rd &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />&nbsp;&nbsp;&nbsp;28 km/h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    7.3 km away (32 min) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12:11 AM
-                  </li>
+                  {routes.map((route, index) => (
+                    <li key={index} className="list-group-item justify-content-center suggest-tab">
+                      {route.summary} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <img src={trafficSpeedIcon} alt="Traffic Speed Icon" style={{ width: "20px", height: "20px" }} />
+                      &nbsp;&nbsp;&nbsp;{route.legs[0].duration.text} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {route.legs[0].distance.text} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {new Date().toLocaleTimeString()}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -136,3 +136,4 @@ function App() {
 }
 
 export default App;
+

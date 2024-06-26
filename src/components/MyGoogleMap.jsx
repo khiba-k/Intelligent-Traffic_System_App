@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 
-
 const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
   const mapStyles = {
     height: '400px',
@@ -20,21 +19,22 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
       {
         origin: currentLocation,
         destination: destination,
-        travelMode: 'DRIVING'
+        travelMode: 'DRIVING',
+        provideRouteAlternatives: true // Request multiple routes
       },
       (result, status) => {
         if (status === 'OK') {
           setDirections(result);
-          setLocationName(`${currentLocation}  to  ${destination}`);
-         } else {
-           console.error('Directions request failed due to ' + status);
-         setLocationName('Route Not Found');
+          setLocationName(`${currentLocation} to ${destination}`);
+        } else {
+          console.error('Directions request failed due to ' + status);
+          setLocationName('Route Not Found');
         }
       }
     );
   };
 
-  const [directions, setDirections] = React.useState(null);
+  const [directions, setDirections] = useState(null);
 
   return (
     <div>
@@ -44,7 +44,18 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
           zoom={12}
           center={{ lat: -29.311667, lng: 27.481389 }} // Default center if no route is displayed
         >
-          {directions && <DirectionsRenderer directions={directions} />}
+          {directions && directions.routes.map((route, index) => (
+            <DirectionsRenderer
+              key={index}
+              directions={directions}
+              routeIndex={index}
+              options={{
+                polylineOptions: {
+                  strokeColor: index === 0 ? 'blue' : 'gray',
+                },
+              }}
+            />
+          ))}
         </GoogleMap>
       </LoadScript>
     </div>
@@ -52,4 +63,3 @@ const MyGoogleMap = ({ currentLocation, destination, setLocationName }) => {
 };
 
 export default MyGoogleMap;
-
