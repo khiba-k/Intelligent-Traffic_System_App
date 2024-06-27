@@ -118,27 +118,35 @@ function App() {
                <ul className="list-group list-group-flush">
                  {activeTab !== "Customize" && (
                    <li className="list-group-item custom-list-group2 list-group">
-                     Lakeside
-                     <DeleteData className="mr-0"/>
+                     <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+                        <span>Lakeside</span>
+                        <DeleteData /> 
+                        </div>
                    </li>
                  )}
                  {activeTab !== "Customize" && (
                    <li className="list-group-item custom-list-group2 list-group">
-                     BEDCO
-                     <DeleteData style={{marginRight: "0px"}}/>
-                   </li>
+                   <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+                      <span>BEDCO</span>
+                      <DeleteData /> 
+                      </div>
+                 </li>
                  )}
                  {activeTab !== "Customize" && (
                    <li className="list-group-item custom-list-group2 list-group">
-                     Home
-                     <DeleteData/>
-                   </li>
+                   <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+                      <span>Maseru East</span>
+                      <DeleteData /> 
+                      </div>
+                      </li>
                  )}
                  {activeTab !== "Customize" && (
                    <li className="list-group-item custom-list-group2 list-group">
-                     Maseru Mall
-                     <DeleteData/>
-                   </li>
+                   <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+                      <span>Maseru Mall</span>
+                      <DeleteData /> 
+                      </div>
+                      </li>
                  )}
                  {activeTab === "Customize" && (
                    <>
