@@ -5,22 +5,18 @@ import IconRecentsTab from "./IconRecentsTab";
 import IconCustomize from "./IconCustomize";
 import IconSavedTab from "./IconSavedTab";
 import IconTraveled from "./IconTraveled";
+import DeleteData from "./DeleteData";
 
 const Tabs = ({ activeTab, setActiveTab }) => {
   const [recentLocations, setRecentLocations] = useState([]);
 
   useEffect(() => {
-    // if (activeTab === "Recent") {
-    //   fetchRecentLocations();
-    // }
     fetchRecentLocations(activeTab);
-
-
   }, [activeTab]);
 
   const fetchRecentLocations = async (activetabs) => {
     try {
-      const response = await axios.get(`http://localhost:5000/${activetabs}/`);  // Replace with your Flask backend URL
+      const response = await axios.get(`http://localhost:5000/${activetabs}/`);
       console.log(response.data);
       setRecentLocations(response.data);
     } catch (error) {
@@ -28,10 +24,17 @@ const Tabs = ({ activeTab, setActiveTab }) => {
     }
   };
 
-
-
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const handleDelete = async (location) => {
+    try {
+      await axios.delete(`http://localhost:5000/${activeTab}/${location}`); // Replace with your Flask backend URL
+      fetchRecentLocations(activeTab); // Refresh the list after deletion
+    } catch (error) {
+      console.error('Error deleting location:', error);
+    }
   };
 
   return (
@@ -75,25 +78,16 @@ const Tabs = ({ activeTab, setActiveTab }) => {
         </li>
       </ul>
       {activeTab}
-      {activeTab === "recents" ? (
-        <ul className="list-group list-group-flush">
-          {recentLocations.map((location, index) => (
-            <li key={index} className="list-group-item custom-list-group2 list-group">
-              {location}
-            </li>
-          ))}
-        </ul>
-      ):(
-        <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush">
         {recentLocations.map((location, index) => (
           <li key={index} className="list-group-item custom-list-group2 list-group">
-            {location}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
+              {location}
+              <DeleteData onDelete={() => handleDelete(location)} />
+            </div>
           </li>
         ))}
       </ul>
-      )
-    
-    }
     </div>
   );
 };
