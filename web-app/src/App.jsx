@@ -6,6 +6,9 @@ import Tabs from './components/Tabs';
 import IconSaveButton from './components/IconSaveButton';
 import trafficSpeedIcon from "./assets/speedometerIcon.png";
 import Customize from './components/Customize';
+import IconTheme from './components/IconTheme';
+import IconLogo from './components/IconLogo';
+
 
 
 
@@ -62,14 +65,20 @@ function App() {
 
   return (
     <div className={` ${isBlackAndWhiteTheme ? 'black-and-white-theme' : ''}`}>
+
     <div className="bg full-height">
       {/* container */}
       <div className="container upper-row p-5">
         {/* upper row */}
         <div className="row">
-          <div className="col pr-0">
+        <div className="col" style={{paddingLeft: "0px"}}>
+        <div style={{paddingLeft: "23px", color: "#2BAF6A", fontWeight: "100px"}}>
+        <IconLogo/><p style={{fontFamily: "sans-serif"}}>TKT Smart Traffic</p>
+        </div>
+      </div>
+          <div className="col" style={{marginRight: "0px"}}>
 
-            <div className="input-group mb-3">
+            <div className="input-group mb-3" style={{width: "800px"}}>
               <button
                 className="btn btn-primary d-lg-none"
                 onClick={toggleTabColumn}
@@ -110,6 +119,8 @@ function App() {
         {/* Tab Column */}
         {(isTabColumnVisible || window.innerWidth >= 992) && (
            <div className={`col-lg-2 ${isBlackAndWhiteTheme ? 'black-and-white-theme' : ''}`}>
+            <div className="row justify-content-center mt-0">
+            </div>
            <div className="row justify-content-center">
              <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
            </div>
@@ -142,8 +153,8 @@ function App() {
                        <h5>Customize</h5>
                      </li>
                      <li className="list-group-item custom-list-group2">
-                       <button onClick={handleThemeChange}>
-                         Color Change
+                       <button style={{border: "none", backgroundColor: "#D9D9D9"}}onClick={handleThemeChange}>
+                         <IconTheme/>
                        </button>
                      </li>
                    </>
