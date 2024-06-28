@@ -6,8 +6,9 @@ import IconCustomize from "./IconCustomize";
 import IconSavedTab from "./IconSavedTab";
 import IconTraveled from "./IconTraveled";
 import DeleteData from "./DeleteData";
+import IconTheme from "./IconTheme";
 
-const Tabs = ({ activeTab, setActiveTab }) => {
+const Tabs = ({ activeTab, setActiveTab, handleThemeChange }) => {
   const [recentLocations, setRecentLocations] = useState([]);
 
   useEffect(() => {
@@ -36,6 +37,12 @@ const Tabs = ({ activeTab, setActiveTab }) => {
       console.error('Error deleting location:', error);
     }
   };
+
+  // const [isBlackAndWhiteTheme, setIsBlackAndWhiteTheme] = useState(false);
+
+  // const handleThemeChange = () => {
+  //   setIsBlackAndWhiteTheme(!isBlackAndWhiteTheme); 
+  // };
 
   return (
     <div>
@@ -69,17 +76,22 @@ const Tabs = ({ activeTab, setActiveTab }) => {
           <IconTraveled />&nbsp;&nbsp;&nbsp;Traveled
         </li>
         <li
-          className={`list-group-item ${
-            activeTab === "Customize" ? "current-tab" : ""
-          } custom-list-group`}
-          onClick={() => handleTabClick("Customize")}
-        >
-          <IconCustomize />&nbsp;&nbsp;&nbsp;Customize
-        </li>
+      className={`list-group-item ${
+        activeTab === "Customize" ? "current-tab" : ""
+      } custom-list-group`}
+      onClick={() => setActiveTab("Customize")}
+    >
+      <IconCustomize />&nbsp;&nbsp;&nbsp;Customize
+    </li>
+        
       </ul>
-      {activeTab}
+      <div className="row justify-content-center" style={{ paddingTop: "12px" }}>
+             <div className="card display-card" style={{ width: "200px" }}>
+      
       <ul className="list-group list-group-flush">
-        {recentLocations.map((location, index) => (
+      
+      {activeTab}
+        {recentLocations.map((location, index) => activeTab !== "Customize" && (
           <li key={index} className="list-group-item custom-list-group2 list-group">
             <div style={{ display: "grid", gridTemplateColumns: "1fr auto" }}>
               {location}
@@ -87,7 +99,21 @@ const Tabs = ({ activeTab, setActiveTab }) => {
             </div>
           </li>
         ))}
+        {activeTab === "Customize" && (
+                   <>
+                     <li className="list-group-item custom-list-group2">
+                       <h5>Customize</h5>
+                     </li>
+                     <li className="list-group-item custom-list-group2">
+                       <button style={{border: "none", backgroundColor: "#D9D9D9"}}onClick={handleThemeChange}>
+                         <IconTheme/>
+                       </button>
+                     </li>
+                   </>
+                 )}
       </ul>
+    </div>
+    </div>
     </div>
   );
 };
