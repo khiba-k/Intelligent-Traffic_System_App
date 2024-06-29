@@ -15,6 +15,7 @@ body {
 .upper-row {
   height: 15%; /* 20% of the parent height */
   align-items: center;
+  width: 100%;
 }
 
 .lower-row {
