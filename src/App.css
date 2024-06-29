@@ -1,5 +1,5 @@
 body {
-  background-color: #E8E9EB;
+  background-color: #C4E1C5;
 
 }
 
@@ -50,7 +50,8 @@ body {
 }
 
 .suggest-tab {
-  background-color: #d9d9d9;
+  background-color: rgba(196, 225, 197, 0.5);
+  
 }
 
 .current-tab {
@@ -61,7 +62,7 @@ body {
 }
 
 .black-and-white-theme {
-  filter: grayscale(100%);
+  filter:grayscale(100%);
 }
 
 /* @media (max-width: 991.98px) {
