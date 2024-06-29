@@ -8,8 +8,8 @@ export default function App() {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/Main" element={<Home />} />
+                    <Route path="/" element={<Welcome />} />
                 </Routes>
             </BrowserRouter>
         </>
