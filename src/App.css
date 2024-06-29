@@ -1,5 +1,6 @@
 body {
-  background-color: #C4E1C5;
+  background-color: #16423f;
+  background: linear-gradient(to bottom right, white, rgba(150, 150, 150, 1), white);
 
 }
 
@@ -50,7 +51,8 @@ body {
 }
 
 .suggest-tab {
-  background-color: rgba(196, 225, 197, 0.5);
+  /* background-color: rgba(196, 225, 197, 0.5); */
+  background-color: #d9d9d9;
   
 }
 
