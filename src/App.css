@@ -17,7 +17,8 @@ body {
   height: 15%; /* 20% of the parent height */
   align-items: center;
   display: flex;
-  width: 100%;
+  padding: 20px;
+  /* width: 100%; */
 }
 
 .child_1{

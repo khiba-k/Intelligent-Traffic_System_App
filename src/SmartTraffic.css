@@ -1,3 +1,55 @@
 .display-4 {
   text-shadow: 0 0 3px #fff, 0 0 5px #000;  /* Glossy effect with white and black shadows */
+  font-size: 90px;
+  color: white;
+  text-align: center;
+  padding-top: 30px;
+
+}
+
+.infor{
+    color: white;
+    font-size: 20px;
+    padding-top: 100px;
+    font-weight: 20px;
+    text-align: center;
+}
+
+.footor{
+  padding: 6px;
+  color: white;
+  font-size: 20px;
+  background-color: #288066;
+  width: 100%;
+  height: 10vh;
+  font-family: sans;
+  font-weight: normal;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  body{
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+
+
+  }
+
+  .landing-parent{
+    width: 100%;
+    height: 100%;
+  }
+
+  .display-4{
+    font-size: 10vw;
+  }
+
+  video{
+    height: 100vh;
+  }
+
+  .infor{
+    font-size: 4.008vw;
+  }
 }
